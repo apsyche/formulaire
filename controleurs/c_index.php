@@ -11,8 +11,8 @@ switch($action){
         break;
     }
     case 'valideConnexion':{
-        $login = $_REQUEST['login'];        
-        $mdp = $_REQUEST['mdp'];       
+        $login = htmlentities($_REQUEST['login']);        
+        $mdp = htmlentities($_REQUEST['mdp']);       
         $utilisateur = $pdo->verifConnexion($login,$mdp);
        
         if(!is_array($utilisateur)){
@@ -33,23 +33,23 @@ switch($action){
         include 'vues/v_inscription.php';break;
     }
     case 'valideInscription':{
-        $login = $_REQUEST['login'];
-        $mdp = $_REQUEST['mdp'];
+        $login = htmlentities($_REQUEST['login']);
+        $mdp = htmlentities($_REQUEST['mdp']);
         $select = $pdo->verifDonnees($login);
-        $p = $select['login'];
+        $verifIdentifiant = $select['identifiant'];
         if(empty($_POST['login']) || empty($_POST['mdp'])){
             ajouterMsg("Champs vide");
             include 'vues/v_msg.php';
             include 'vues/v_inscription.php';
             break;
         }
-        else if($login == $p){
-            ajouterMsg("Identifiant djà utilisé");
+        else if($login == $verifIdentifiant){
+            ajouterMsg("Identifiant déjà utilisé");
             include 'vues/v_msg.php';
             include 'vues/v_inscription.php';
             break;
         }
-        else if($login != $p){
+        else if($login != $verifIdentifiant){
         $pdo->insertUtilisateur($login,$mdp);
         ajouterMsg("Identifiant crée");
         include 'vues/v_msg.php';
