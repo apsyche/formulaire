@@ -10,6 +10,6 @@
 
             <input type="submit" value="Valider" name="valider">
     </form>
-    <a href="index.php?uc=connexion"><input type="button" value="Connexion"></a>
+    <a href="connexion"><input type="button" value="Connexion"></a>
 </div>
 

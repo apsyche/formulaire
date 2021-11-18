@@ -1,0 +1,19 @@
+#--------------------------------
+#		Config
+#--------------------------------
+
+
+
+
+Options -Indexes
+
+
+#--------------------------------
+#		Réécriture
+#--------------------------------
+
+RewriteEngine on
+
+RewriteRule ^connexion$ index.php?uc=connexion
+RewriteRule ^inscription$ index.php?uc=connexion&action=inscription
+#RewriteRule ^$ index.php?uc=connexion&action=valideConnexion

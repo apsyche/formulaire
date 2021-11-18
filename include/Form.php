@@ -24,8 +24,16 @@
         }
         
         public function verifConnexion($login, $mdp){
-            $req = "select * from utilisateur where utilisateur.identifiant='$login' and utilisateur.mdp='$mdp'";
-            $rs = Form::$monPdo->query($req);
+            $req = "select * from utilisateur where utilisateur.identifiant=:login and utilisateur.mdp=:mdp";
+            /*$rs = Form::$monPdo->query($req);
+            $ligne = $rs->fetch();
+            return $ligne;
+             * */
+            
+            $rs = Form::$monPdo->prepare($req);
+            $rs->bindParam(':login',$login);
+            $rs->bindParam(':mdp',$mdp);
+            $rs->execute();
             $ligne = $rs->fetch();
             return $ligne;
         }
@@ -36,8 +44,14 @@
         }
         
       public function verifDonnees($login){
-            $req = "select utilisateur.identifiant from utilisateur where utilisateur.identifiant='$login'";
-            $rs = Form::$monPdo->query($req);
+            $req = "select utilisateur.identifiant from utilisateur where utilisateur.identifiant=:login";
+            /*$rs = Form::$monPdo->query($req);
+            $ligne = $rs->fetch();
+            return $ligne;
+            */
+            $rs = Form::$monPdo->prepare($req);
+            $rs->bindParam(':login',$login);
+            $rs->execute();
             $ligne = $rs->fetch();
             return $ligne;
         }
